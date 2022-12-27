@@ -1,0 +1,9 @@
+app/templates
+app/migrations
+app/static
+royals/settings.py
+db.sqlite3
+app/__pycache__
+royals/__pycache__
+app/__init__.py
+royals/__init__.py
