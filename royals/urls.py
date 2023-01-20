@@ -23,6 +23,6 @@ urlpatterns = [
     path('roster/', views.roster),
     path('schedule/', views.schedule),
     path('injuries/', views.injuries),
-    path('transactions/', views.transactions),
+    # path('transactions/', views.transactions),
     path('about/', views.about),
 ]

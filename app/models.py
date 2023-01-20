@@ -5,6 +5,7 @@ import datetime
 # Staff Photos
 ishaan = "https://cdn.discordapp.com/attachments/733048042114252940/1056427171545088010/ishaan-modified.png"
 aj = "https://cdn.discordapp.com/attachments/733048042114252940/1056427066523930645/person-modified.png"
+sam = "https://cdn.discordapp.com/attachments/733048042114252940/1058952675116449852/IMG_6241-modified.png"
 madelyn = "https://cdn.discordapp.com/attachments/733048042114252940/1056427172279103598/madelyn-modified.png"
 prathik = "https://cdn.discordapp.com/attachments/733048042114252940/1056427068998561833/prathik-modified.png"
 sai = "https://cdn.discordapp.com/attachments/733048042114252940/1056427066523930645/person-modified.png"
@@ -30,9 +31,10 @@ john = "https://cdn.discordapp.com/attachments/733048042114252940/10564270676354
 nikhil = "https://cdn.discordapp.com/attachments/733048042114252940/1056427067232768100/nikhil-modified.png"
 person = "https://cdn.discordapp.com/attachments/733048042114252940/1056427066523930645/person-modified.png"
 
-photo_tuple = [(ishaan, 'Ishaan'), (aj, 'AJ St. Gelais'), (madelyn, "Madelyn"), (prathik, "Prathik"), (sai, "Sai"), (person, "None"), (ari, "Ari"), (tim, "Tim"), (dev, "Dev"), (charlie, "Charlie"), (arav, "Arav"), (erin, "Erin"), (ranit, "Ranit"), (ben, "Ben"), (luke, "Luke"), (bailey, "Bailey"), (brendan, "Brendan"), (zach, "Zach"), (amelia, "Amelia"), (alex, "Alex"), (audrey, "Audrey"), (tedi, "Tedi"), (john, "John"), (nikhil, "Nikhil")]
+photo_tuple = [(ishaan, 'Ishaan Arora'), (aj, 'AJ St. Gelais'), (sam, 'Sam Slavinsky'),(madelyn, "Madelyn Cusano"), (prathik, "Prathik Pradeep"), (sai, "Sai Bhat"), (ari, "Ari Frankel"), (tim, "Tim Sturtz"), (dev, "Dev Sappal"), (charlie, "Charlie Martin"), (arav, "Arav Arora"), (erin, "Erin Proulx"), (ranit, "Ranit Sinha"), (ben, "Ben Kane"), (luke, "Luke Laferty"), (bailey, "Bailey Kerrigan"), (brendan, "Brendan Laferty"), (zach, "Zach Slavinsky"), (amelia, "Amelia Taylor"), (alex, "Alex Corey"), (audrey, "Audrey Doyle"), (tedi, "Tedi Hunt"), (john, "John Woodward"), (nikhil, "Nikhil Pratapagiri"), (person, "None")]
 
 class StaffRoster(models.Model):
+    id = models.IntegerField(primary_key=True)
     photo = models.CharField(max_length=100, choices=photo_tuple)
     name = models.CharField(max_length=30)
     position = models.CharField(max_length=30)
@@ -45,7 +47,7 @@ class SoccerRoster(models.Model):
     photo = models.CharField(max_length=100, choices=photo_tuple)
     name = models.CharField(max_length=30)
     position = models.CharField(max_length=30)
-    goals = models.CharField(max_length=30)
+    goals = models.IntegerField()
     class Meta:
         db_table = "soccer_roster"
     def __str__(self):
@@ -55,10 +57,10 @@ class BasketballRoster(models.Model):
     photo = models.CharField(max_length=100, choices=photo_tuple)
     name = models.CharField(max_length=30)
     position = models.CharField(max_length=30)
-    points = models.CharField(max_length=30)
-    completed_ft = models.CharField(max_length=30)
-    attempted_ft = models.CharField(max_length=30)
-    ft_percent = models.CharField(max_length=30)
+    points = models.IntegerField()
+    completed_ft = models.IntegerField()
+    attempted_ft = models.IntegerField()
+    ft_percent = models.DecimalField(max_digits=10, decimal_places=2)
     class Meta:
         db_table = "basketball_roster"
     def __str__(self):
@@ -75,31 +77,33 @@ class Injuries(models.Model):
     def __str__(self):
          return self.name
 
-class Transactions(models.Model):
-    current_date = datetime.datetime.now()
+# class Transactions(models.Model):
+#     current_date = datetime.datetime.now()
 
-    date = models.CharField(max_length=20, default=current_date.strftime("%B %d, %Y"))
-    transaction = models.CharField(max_length=100)
-    team = models.CharField(max_length=50, choices=[('All', 'All'), ('Indoor Soccer Team', 'Indoor Soccer Team'), ('Basketball Team', "Basketball Team")])
-    class Meta:
-        db_table = "transactions"
-        verbose_name_plural = "transactions"
-    def __str__(self):
-         return self.date
+#     id = models.IntegerField(primary_key=True)
+#     date = models.CharField(max_length=50, default=current_date.strftime("%B %d, %Y"))
+#     transaction = models.CharField(max_length=100)
+#     team = models.CharField(max_length=50, choices=[('All', 'All'), ('Indoor Soccer Team', 'Indoor Soccer Team'), ('Basketball Team', "Basketball Team")])
+#     class Meta:
+#         db_table = "transactions"
+#         verbose_name_plural = "transactions"
+#     def __str__(self):
+#          return self.date
 
 class Schedule(models.Model):
-     current_date = datetime.datetime.now()
+    current_date = datetime.datetime.now()
 
-     date = models.CharField(max_length=20, default=current_date.strftime("%B %d, %Y"))
-     time = models.CharField(max_length=20)
-     arena = models.CharField(max_length=20)
-     home_team = models.CharField(max_length=50)
-     win_loss = models.CharField(max_length=20, choices=[('W', 'Win'), ('L', 'Loss'), ('TBD', 'TBD')])
-     overall_score = models.CharField(max_length=20)
-     visiting_team = models.CharField(max_length=20)
-     highest_goal_scorer = models.CharField(max_length=75)
-     class Meta:
-         db_table = "schedule"
-         verbose_name_plural = "schedule"
-     def __str__(self):
-          return self.date
+    order = models.IntegerField(primary_key=True)
+    date = models.CharField(max_length=50, default=current_date.strftime("%B %d, %Y"))
+    time = models.CharField(max_length=50)
+    arena = models.CharField(max_length=50)
+    home_team = models.CharField(max_length=50)
+    win_loss = models.CharField(max_length=50, choices=[('W', 'Win'), ('L', 'Loss'), ('Tie', 'Tied'),('TBD', 'TBD')])
+    overall_score = models.CharField(max_length=50)
+    visiting_team = models.CharField(max_length=50)
+    highest_goal_scorer = models.CharField(max_length=75)
+    class Meta:
+        db_table = "schedule"
+        verbose_name_plural = "schedule"
+    def __str__(self):
+        return self.date
