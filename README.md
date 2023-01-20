@@ -1,5 +1,5 @@
 # Royals AAU Website
- This website was made for Royals using Django.
+ This website was made for Royals Sports using Django.
  
  ## Front-end 
  The front-end for this website was done with HTML and CSS. I chose bootstrap as the front-end framework for the responsive structure.
