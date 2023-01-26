@@ -13,9 +13,10 @@ def main(request):
 
 def roster(request):
     context = {
-        'staff' : StaffRoster.objects.all(),
+        'staff' : StaffRoster.objects.all().order_by('id'),
         'soccer' : SoccerRoster.objects.all().order_by('-position'),
         'basketball' : BasketballRoster.objects.all().order_by('-position'),
+        'injuries' : Injuries.objects.all,
     }
     return render(request, 'app/roster.html', context)
 

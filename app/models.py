@@ -4,11 +4,10 @@ import datetime
 
 # Staff Photos
 ishaan = "https://cdn.discordapp.com/attachments/733048042114252940/1056427171545088010/ishaan-modified.png"
-aj = "https://cdn.discordapp.com/attachments/733048042114252940/1056427066523930645/person-modified.png"
 sam = "https://cdn.discordapp.com/attachments/733048042114252940/1058952675116449852/IMG_6241-modified.png"
 madelyn = "https://cdn.discordapp.com/attachments/733048042114252940/1056427172279103598/madelyn-modified.png"
 prathik = "https://cdn.discordapp.com/attachments/733048042114252940/1056427068998561833/prathik-modified.png"
-sai = "https://cdn.discordapp.com/attachments/733048042114252940/1056427066523930645/person-modified.png"
+sai = "https://cdn.discordapp.com/attachments/733048042114252940/1067951030794461245/sai-modified.png"
 ari = "https://cdn.discordapp.com/attachments/733048042114252940/1056427173185073152/ari-modified.png"
 
 # Roster Photos
@@ -20,41 +19,39 @@ erin = "https://cdn.discordapp.com/attachments/733048042114252940/10564271725601
 ranit = "https://cdn.discordapp.com/attachments/733048042114252940/1056427069325709312/ranit-modified.png"
 ben = "https://cdn.discordapp.com/attachments/733048042114252940/1056427068356841492/ben-modified.png"
 luke = "https://cdn.discordapp.com/attachments/733048042114252940/1056427066205155338/luke2-modified.png"
-bailey = "https://cdn.discordapp.com/attachments/733048042114252940/1056427066523930645/person-modified.png"
 brendan = "https://cdn.discordapp.com/attachments/733048042114252940/1056427066851070014/brendan-modified.png"
 zach = "https://cdn.discordapp.com/attachments/733048042114252940/1056427170861416550/zach-modified.png"
-amelia = "https://cdn.discordapp.com/attachments/733048042114252940/1056427066523930645/person-modified.png"
-alex = "https://cdn.discordapp.com/attachments/733048042114252940/1056427066523930645/person-modified.png"
-audrey = "https://cdn.discordapp.com/attachments/733048042114252940/1056427066523930645/person-modified.png"
 tedi = "https://cdn.discordapp.com/attachments/733048042114252940/1056427068029677608/tedi-modified.png"
 john = "https://cdn.discordapp.com/attachments/733048042114252940/1056427067635404871/john-modified.png"
 nikhil = "https://cdn.discordapp.com/attachments/733048042114252940/1056427067232768100/nikhil-modified.png"
-person = "https://cdn.discordapp.com/attachments/733048042114252940/1056427066523930645/person-modified.png"
+none = "https://cdn.discordapp.com/attachments/733048042114252940/1056427066523930645/person-modified.png"
 
-photo_tuple = [(ishaan, 'Ishaan Arora'), (aj, 'AJ St. Gelais'), (sam, 'Sam Slavinsky'),(madelyn, "Madelyn Cusano"), (prathik, "Prathik Pradeep"), (sai, "Sai Bhat"), (ari, "Ari Frankel"), (tim, "Tim Sturtz"), (dev, "Dev Sappal"), (charlie, "Charlie Martin"), (arav, "Arav Arora"), (erin, "Erin Proulx"), (ranit, "Ranit Sinha"), (ben, "Ben Kane"), (luke, "Luke Laferty"), (bailey, "Bailey Kerrigan"), (brendan, "Brendan Laferty"), (zach, "Zach Slavinsky"), (amelia, "Amelia Taylor"), (alex, "Alex Corey"), (audrey, "Audrey Doyle"), (tedi, "Tedi Hunt"), (john, "John Woodward"), (nikhil, "Nikhil Pratapagiri"), (person, "None")]
+photo_tuple = [(ishaan, 'Ishaan Arora'), (sam, 'Sam Slavinsky'),(madelyn, "Madelyn Cusano"), (prathik, "Prathik Pradeep"), (sai, "Sai Bhat"), (ari, "Ari Frankel"), (tim, "Tim Sturtz"), (dev, "Dev Sappal"), (charlie, "Charlie Martin"), (arav, "Arav Arora"), (erin, "Erin Proulx"), (ranit, "Ranit Sinha"), (ben, "Ben Kane"), (luke, "Luke Laferty"), (brendan, "Brendan Laferty"), (zach, "Zach Slavinsky"), (tedi, "Tedi Hunt"), (john, "John Woodward"), (nikhil, "Nikhil Pratapagiri"), (none, "None")]
 
 class StaffRoster(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.IntegerField(primary_key=True, help_text="This is how each person is ordered on the roster")
     photo = models.CharField(max_length=100, choices=photo_tuple)
     name = models.CharField(max_length=30)
     position = models.CharField(max_length=30)
     class Meta:
         db_table = "staff_roster"
     def __str__(self):
-         return self.name
+        return self.name
 
 class SoccerRoster(models.Model):
     photo = models.CharField(max_length=100, choices=photo_tuple)
+    tw_id = models.CharField(max_length=20, help_text="Teamworks ID")
     name = models.CharField(max_length=30)
     position = models.CharField(max_length=30)
     goals = models.IntegerField()
     class Meta:
         db_table = "soccer_roster"
     def __str__(self):
-         return self.name
+        return f"{self.name} ({self.tw_id})"
 
 class BasketballRoster(models.Model):
     photo = models.CharField(max_length=100, choices=photo_tuple)
+    tw_id = models.CharField(max_length=20, help_text="Teamworks ID")
     name = models.CharField(max_length=30)
     position = models.CharField(max_length=30)
     points = models.IntegerField()
@@ -64,7 +61,7 @@ class BasketballRoster(models.Model):
     class Meta:
         db_table = "basketball_roster"
     def __str__(self):
-         return self.name
+        return f"{self.name} ({self.tw_id})"
 
 class Injuries(models.Model):
     photo = models.CharField(max_length=100, choices=photo_tuple)
@@ -75,7 +72,7 @@ class Injuries(models.Model):
         db_table = "injuries"
         verbose_name_plural = "injuries"
     def __str__(self):
-         return self.name
+        return self.name
 
 # class Transactions(models.Model):
 #     current_date = datetime.datetime.now()
@@ -93,15 +90,15 @@ class Injuries(models.Model):
 class Schedule(models.Model):
     current_date = datetime.datetime.now()
 
-    order = models.IntegerField(primary_key=True)
+    order = models.IntegerField(primary_key=True, help_text='This is how each "schedule" is ordered on royalsauu.org/schedule')
     date = models.CharField(max_length=50, default=current_date.strftime("%B %d, %Y"))
     time = models.CharField(max_length=50)
     arena = models.CharField(max_length=50)
     home_team = models.CharField(max_length=50)
     win_loss = models.CharField(max_length=50, choices=[('W', 'Win'), ('L', 'Loss'), ('Tie', 'Tied'),('TBD', 'TBD')])
-    overall_score = models.CharField(max_length=50)
+    overall_score = models.CharField(max_length=50, blank=True)
     visiting_team = models.CharField(max_length=50)
-    highest_goal_scorer = models.CharField(max_length=75)
+    highest_goal_scorer = models.CharField(max_length=75, blank=True)
     class Meta:
         db_table = "schedule"
         verbose_name_plural = "schedule"
