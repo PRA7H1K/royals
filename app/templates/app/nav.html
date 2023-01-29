@@ -1,0 +1,38 @@
+{% load static %}
+<nav class="navbar bg-light justify-content-center">
+    <div class="container border-bottom border-dark">
+        <a class="navbar-brand" href="/">
+            <img src="{% static 'royals2.png' %}" alt="Logo" width="60px" class="d-inline-block align-text-top royals-logo" style="margin-right: 5%;">
+            ROYALS SPORTS
+            <a class="aau"><img src="{% static 'aau.png' %}" width="75px"></a>
+        </a>
+    </div>
+    <span class="nav" style="margin-bottom: 0; padding-bottom: 0;">
+        <span class="nav-item">
+            <a class="nav-link {{ home }}" href="/" style="margin-bottom: 1%; padding-bottom: 1%;">Home</a>
+        </span>
+        <span class="nav-item">
+            <a class="nav-link {{ roster }}" href="/roster/" style="margin-bottom: 1%; padding-bottom: 1%;">Rosters & Stats</a>
+        </span>
+        <span class="nav-item">
+            <a class="nav-link {{ schedule }}" href="/schedule/" style="margin-bottom: 1%; padding-bottom: 1%;">Schedule</a>
+        </span>
+        <span class="nav-item">
+            <a class="nav-link {{ injuries }}" href="/injuries/" style="margin-bottom: 1%; padding-bottom: 1%;">Injuries</a>
+        </span>
+        <!-- <span class="nav-item">
+            <a class="nav-link {{ transactions }}" href="/transactions/" style="margin-bottom: 1%; padding-bottom: 1%;">Transactions</a>
+        </span> -->
+        <span class="nav-item">
+            <a class="nav-link {{ about }}" href="/about/" style="margin-bottom: 1%; padding-bottom: 1%;">About</a>
+        </span>
+        <span class="nav-item">
+            <a class="nav-link" href="/admin/" style="margin-bottom: 1%; padding-bottom: 1%;" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 18 18">
+                    <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
+                    <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
+                  </svg>
+                Sign In</a>
+        </span>
+    </span>
+</nav>
