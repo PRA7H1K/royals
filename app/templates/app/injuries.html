@@ -67,7 +67,7 @@ window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){va
                         <div class="p-3">
                             <div class="card mb-3 bg-light">
                                 <div class="card-body align-middle">
-                                    <h5 class="card-title"><img class="rosterpic" src="{{ data.photo }}"> {{ data.name }}</h5>
+                                    <h5 class="fw-bold" style="font-size: 150%;"><img class="rosterpic" src="{{ data.photo }}"> <a class="name" href="/player/?name={{ data.name }}">{{ data.name }}</a></h5>
                                     <div class="card-text align-middle"><a style="color: grey;">Status</a> 
                                         {% if data.status == 'green.png' %}
                                             <img src="{% static 'green.png' %}" width="20px">Probable

@@ -16,7 +16,7 @@
     <meta name="og:url" content="https://royalsaau.org">
     <meta name="og:image" content="https://cdn.discordapp.com/attachments/733048042114252940/1050979290205925396/IMG_1793.png">
 
-    <title>Royals | About</title>
+    <title>Royals | Roster & Stats</title>
 
     <link rel="stylesheet" href="{% static 'style.css' %}">
 
@@ -31,6 +31,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Flamenco&display=swap" rel="stylesheet">
     
     <link rel="icon" href="{% static 'royals.png' %}">
 </head>
@@ -54,73 +56,159 @@
     gtag('config', 'G-88PHG6YEEB');
 </script>
 
-{% include "app/nav.html" with home=" " roster=" " schedule=" " injuries=" " transactions=" " about="active" %}
+{% include "app/nav.html" with home=" " roster=" " schedule=" " injuries=" " transactions=" " about=" " %}
 
 <body style="overflow-x: hidden; background-color: rgb(225, 225, 225)">
 
     <div class="container px-4">
         <div class="row">
-            <h1 class="text-center" style="margin-top: 2%; margin-bottom: 0.5%; font-size: 400%; font-family: 'Teko', sans-serif;">Founders</h1>
-            <div class="col-md-4 gy-4" style="margin-top: 0; padding-top: 0;">
+            <div class="col-md-12 gy-4">
                 <div class="p-3 bg-light cards">
-                    <div class="card mb-3 bg-light" style="max-width: 540px;">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="{% static 'arav.jpeg' %}" class="img-fluid rounded-start" alt="..." width="100%" height="100%">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title"><a class="name" href="/player/?name=arav%20arora">Arav Arora</a></h5>
-                                    <p class="card-text">Arav is a senior at Littleton High School. He formed Royals alongside Ranit Sinha and Zach Slavinsky and has been a mainstay as the general manager. He loves what he does and can't wait to hoist a trophy one day.</p>
-                                </div>
-                                <div class="card-footer bg-transparent"><a href="https://www.instagram.com/arav_arora18/" target="_blank"><img src="{% static 'insta.png' %}" class="img-fluid rounded-start" alt="..." width="40px"></a></div>
-                            </div>
+                    {% if staff_position == "" and soccer_position == "" and basketball_position == "" %}
+                        <h1 style="color: black; font-size: 300%; text-align: center;"><b>Player Not Found</b></h1>
+                    {% else %}
+                    <div class="row">
+                        <div class="col-md-2 gy-4 align-items-center text-center">
+                            <img src="{{ photo }}" width="100px">
+                        </div>
+                        <div class="col-md-10 gy-4">
+                            <h1 class="profile-name" style="color: black; font-size: 300%;">
+                                <b>{{ player }}</b>
+                            </h1>
+                            <h1 style="color: grey; font-size: 125%;">
+                                <b>{{ bio }}</b>
+                            </h1>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <div class="col-md-4 gy-4" style="margin-top: 0; padding-top: 0;">
-                <div class="p-3 bg-light cards">
-                    <div class="card mb-3 bg-transparent" style="max-width: 540px;">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="{% static 'zach.jpeg' %}" class="img-fluid rounded-start" alt="..." width="100%" height="100%">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title"><a class="name" href="/player/?name=zach%20slavinsky">Zach Slavinsky</a></h5>
-                                    <p class="card-text">Zach is a senior at Littleton High School. He is one of the original members of the  franchise, and is a co-owner of the team. Zach is focused on winning a title for the Royals in the upcoming season! </p>
-                                </div>
-                                <div class="card-footer bg-transparent"><a href="https://www.instagram.com/zachslavinsky/" target="_blank"><img src="{% static 'insta.png' %}" class="img-fluid rounded-start" alt="..." width="40px"></a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    <div class="row">
+                        <div class="col-md-9 gy-4">
+                            <div class="p-3 bg-light cards">
+                                <table class="table table-sm align-middle table-responsive" id="table" style="white-space: nowrap;">
+                                    <thead>
+                                        <tr class="fw-bold" style="font-size: 110%;">
+                                            <td scope="col" style="color: black;">Staff Position</td>
+                                            <td scope="col" style="color: black;">Height</td>
+                                            <td scope="col" style="color: black;">Weight</td>
+                                            <td scope="col" style="color: black;">Birthdate</td>
+                                            <td scope="col" style="color: black;">Date Signed</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="font-size: 110%;">
+                                            {% if staff_position != "" %}
+                                                <td class="item">{{ staff_position }}</td>
+                                            {% else %}
+                                                <td class="item">X</td>
+                                            {% endif %}
+                                            {% if height != "" %}
+                                                <td class="item">{{ height }}</td>
+                                            {% else %}
+                                                <td class="item">Not Set</td>
+                                            {% endif %}
 
-            <div class="col-md-4 gy-4" style="margin-top: 0; padding-top: 0;">
-                <div class="p-3 bg-light cards">
-                    <div class="card mb-3 bg-light" style="max-width: 540px;">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="{% static 'ranit.jpeg' %}" class="img-fluid rounded-start" alt="..." width="100%" height="100%">
+                                            {% if weight != "" %}
+                                                <td class="item">{{ weight }}</td>
+                                            {% else %}
+                                                <td class="item">Not Set</td>
+                                            {% endif %}
+
+                                            {% if birthdate != "" %}
+                                                <td class="item">{{ birthdate }}</td>
+                                            {% else %}
+                                                <td class="item">Not Set</td>
+                                            {% endif %}
+
+                                            {% if signed != "" %}
+                                                <td class="item">{{ signed }}</td>
+                                            {% else %}
+                                                <td class="item">Not Set</td>
+                                            {% endif %}
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title"><a class="name" href="/player/?name=ranit%20sinha">Ranit Sinha</a></h5>
-                                    <p class="card-text">Ranit is only a sophomore at Littleton High School as he was recruited by Royals in 8th grade. He has the same goal as everyone else, win at all costs. He has been a cornerstone of this franchise as he cherishes hoisting a trophy under Royals’ name.</p>
-                                </div>
-                                <div class="card-footer bg-transparent"><a href="https://www.instagram.com/ranit_sinha23/" target="_blank"><img src="{% static 'insta.png' %}" class="img-fluid rounded-start" alt="..." width="40px"></a></div>
+                        </div>
+                        <div class="col-md-3 gy-4">
+                            <div class="p-3 bg-light cards">
+                                <table class="table table-sm align-middle table-responsive" id="table" style="white-space: nowrap;">
+                                    <thead>
+                                        <tr class="fw-bold" style="font-size: 110%;">
+                                            <td scope="col" style="color: black;">Status</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% if status != "" %}
+                                            {% if status == 'green.png' %}
+                                                <tr>
+                                                    <td><img src="{% static 'green.png' %}" width="20px">Probable</td>
+                                                </tr>
+                                            {% elif status == 'yellow.png' %}
+                                                <tr>
+                                                    <td><img src="{% static 'yellow.png' %}" width="20px">Questionable</td>
+                                                </tr>
+                                            {% elif status == 'red.png' %}
+                                                <tr>
+                                                    <td><img src="{% static 'red.png' %}" width="20px">Out</td>
+                                                </tr>
+                                            {% endif %}
+                                        <tr>
+                                            <td class="card-text" style="color: grey;">{{ reason }}</td>
+                                        </tr>
+                                        {% else %}
+                                            <td><img src="{% static 'green.png' %}" width="20px">Active</td>
+                                            </tr>
+                                        {% endif %}
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
+
+                    <div class="row">
+
+                        <div class="col-md-4 gy-4">
+                            <div class="p-3 bg-light cards">
+                                <h1 style="font-size: 150%;"><b>Indoor Soccer Stats</b></h1>
+                                {% if goals != "" %}
+                                    <h1 class="" style="font-size: 350%;"><b>{{ goals }} <a style="font-size: 50%">Goals</a></b></h1>
+                                {% else %}
+                                    <h1 class="" style="font-size: 100%; color: grey;">No Stats Found</h1>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="col-md-8 gy-4">
+                            <div class="p-3 bg-light cards">
+                                <h1 style="font-size: 150%;"><b>Basketball Stats</b></h1>
+                                {% if points != "" %}
+                                <table class="table table-sm align-middle table-responsive" id="table" style="white-space: nowrap;">
+                                    <thead class="">
+                                        <tr>
+                                            <th scope="col">Total Points</th>
+                                            <th scope="col">Completed FT</th>
+                                            <th scope="col">Attempted FT</th>
+                                            <th scope="col">FT%</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <td class="item">{{ points }} Points</td>
+                                        <td class="item">{{ cft }} FTs</td>
+                                        <td class="item">{{ aft }} FTs</td>
+                                        <td class="item">{{ ftp }}%</td>
+                                    </tbody>
+                                </table>
+                                {% else %}
+                                    <h1 class="" style="font-size: 100%; color: grey;">No Stats Found</h1>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
-
         {% include "app/footer.html" %}
-
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>

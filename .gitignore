@@ -7,3 +7,11 @@ royals/__pycache__
 app/__init__.py
 royals/__init__.py
 env
+/static/admin
+static/admin_interface
+static/ckeditor
+static/colorfield
+static/streamfield
+static/dark_style.css
+app/static
+admin-interface

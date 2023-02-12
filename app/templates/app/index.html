@@ -115,11 +115,11 @@
                                 {% for data in injuries %}
                                 <tr>
                                     {% if data.status == 'green.png' %}
-                                        <th><img src="{% static 'green.png' %}" width="20px"> {{ data.name }}</th><td>Probable</td>
+                                        <th><img src="{% static 'green.png' %}" width="20px"> <a class="name" href="/player/?name={{ data.name }}">{{ data.name }}</a></th><td>Probable</td>
                                     {% elif data.status == 'yellow.png' %}
-                                        <th><img src="{% static 'yellow.png' %}" width="20px"> {{ data.name }}</th><td>Questionable</td>
+                                        <th><img src="{% static 'yellow.png' %}" width="20px"> <a class="name" href="/player/?name={{ data.name }}">{{ data.name }}</a></th><td>Questionable</td>
                                     {% elif data.status == 'red.png' %}
-                                        <th><img src="{% static 'red.png' %}" width="20px"> {{ data.name }}</th><td>Out</td>
+                                        <th><img src="{% static 'red.png' %}" width="20px"> <a class="name" href="/player/?name={{ data.name }}">{{ data.name }}</a></th><td>Out</td>
                                     {% endif %}
                                 {% endfor %}
                             {% else %}
@@ -225,6 +225,16 @@
             </div> -->
         </div>
 
+        <div class="toast text-bg-secondary position-fixed bottom-0 end-0" role="alert" aria-live="assertive" aria-atomic="true" style="margin-bottom: 1%; margin-right: 1%;">
+            <div class="toast-header">
+                <strong class="me-auto" style="font-size: 125%;">New Feature!</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                <h1 style="font-size: 100%;">You can now click on any name to go to their player profile</h1>
+            </div>
+        </div>
+
         {% include "app/footer.html" %}
 
     </div>
@@ -244,10 +254,12 @@
         // }
 
         window.onload = (event) => {
-            let myAlert = document.getElementById('toast');
-            let bsAlert = new bootstrap.Toast(myAlert);
-            bsAlert.show();
-        }
+            let myAlert = document.querySelectorAll('.toast')[0];
+            if (myAlert) {
+                let bsAlert = new bootstrap.Toast(myAlert);
+                bsAlert.show();
+            }
+        };
     </script>
 
 </body>

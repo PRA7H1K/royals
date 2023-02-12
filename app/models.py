@@ -99,8 +99,26 @@ class Schedule(models.Model):
     overall_score = models.CharField(max_length=50, blank=True)
     visiting_team = models.CharField(max_length=50)
     highest_goal_scorer = models.CharField(max_length=75, blank=True)
+    goals = models.IntegerField(blank=True, null=True, help_text="Number of goals scored by the highest goal scorer")
     class Meta:
         db_table = "schedule"
         verbose_name_plural = "schedule"
     def __str__(self):
         return self.date
+
+class Player(models.Model):
+    current_date = datetime.datetime.now()
+
+    photo = models.CharField(max_length=100, choices=photo_tuple)
+    name = models.CharField(max_length=30)
+    bio = models.CharField(max_length=80, blank=True)
+    height = models.CharField(max_length=10, blank=True, help_text=""" e.g. 6'0" """)
+    weight = models.CharField(max_length=10, blank=True, help_text="e.g. September 2022")
+    birthdate = models.CharField(max_length=20, blank=True, help_text=f'e.g. {current_date.strftime("%B %d, %Y")}')
+    signed = models.CharField(max_length=20, blank=True, help_text="e.g. September 2022")
+
+    class Meta:
+        db_table = "player info"
+        verbose_name_plural = "player info"
+    def __str__(self):
+        return self.name

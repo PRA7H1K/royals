@@ -76,29 +76,31 @@
                             </tr>
                         </thead>
                         <tbody class="table-group-divider">
-			{% for data in schedule %}    
-			<tr>
-				<td scope="row">{{ data.date }}</td>
-				<td>{{ data.time }}</td>
-				<td>{{ data.arena }}</td>
-				<td>{{ data.home_team }}</td>
-				<td>
-					{% if data.win_loss == "W" %}
-					<a style="color: green; font-size: 105%;">W </a>
-					{% elif data.win_loss == "L" %}
-					<a style="color: red; font-size: 105%;">L </a>
-					{% elif data.win_loss == "Tie" %}
-                    <a style="color: orange; font-size: 105%;">T </a>
-					{% else %}
-					<a style="font-size: 105%;">TBD</a>
-					{% endif %} 
-					{{ data.overall_score }}</td>
-				<td>{{ data.visiting_team }}</td>
+                            {% for data in schedule %}    
+                            <tr>
+                                <td scope="row">{{ data.date }}</td>
+                                <td>{{ data.time }}</td>
+                                <td>{{ data.arena }}</td>
+                                <td>{{ data.home_team }}</td>
                                 <td>
-                                    {{ data.highest_goal_scorer }}<br>
+                                    {% if data.win_loss == "W" %}
+                                    <a style="color: green; font-size: 105%;">W </a>
+                                    {% elif data.win_loss == "L" %}
+                                    <a style="color: red; font-size: 105%;">L </a>
+                                    {% elif data.win_loss == "Tie" %}
+                                    <a style="color: orange; font-size: 105%;">T </a>
+                                    {% else %}
+                                    <a style="font-size: 105%;">TBD</a>
+                                    {% endif %} 
+                                    {{ data.overall_score }}</td>
+                                <td>{{ data.visiting_team }}</td>
+                                <td>
+
+                                        <a>{{ data.highest_goal_scorer }} | {{ data.goals }} Goals</a>
+
                                 </td>
                             </tr>
-			{% endfor %}
+			                {% endfor %}
                         </tbody>
                     </table>
                 </div>
